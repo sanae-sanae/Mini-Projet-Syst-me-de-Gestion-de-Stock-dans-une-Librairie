@@ -17,6 +17,8 @@ int main() {
         printf("2. Afficher tous les livres disponibles\n");
         printf("3. Rechercher un livre par son titre\n");
         printf("4. Mettre à jour la quantité d'un livre\n");
+        printf("5. Supprimer un livre\n");
+        printf("6. Voir le total des livres\n");
         printf("0. Quitter\n");
         printf("Sélectionnez le choix que vous voulez : ");
         scanf("%d", &choix);
@@ -79,6 +81,40 @@ int main() {
                         }
                     }
                     if (!trouve) printf(" Livre non trouvé.\n");
+                }
+                break;
+
+            case 5: 
+                {
+                    char recherche[100];
+                    int trouve = 0;
+                    printf("Entrez le titre du livre à supprimer : ");
+                    scanf("%s", recherche);
+                    for (i = 0; i < n; i++) {
+                        if (strcmp(titres[i], recherche) == 0) {
+                            for (int j = i; j < n - 1; j++) {
+                                strcpy(titres[j], titres[j+1]);
+                                strcpy(auteurs[j], auteurs[j+1]);
+                                prix[j] = prix[j+1];
+                                quantite[j] = quantite[j+1];
+                            }
+                            n--;
+                            printf("Livre supprimé avec succès.\n");
+                            trouve = 1;
+                            break;
+                        }
+                    }
+                    if (!trouve) printf("Livre non trouvé.\n");
+                }
+                break;
+
+            case 6:
+                {
+                    int total = 0;
+                    for (i = 0; i < n; i++) {
+                        total += quantite[i];
+                    }
+                    printf("Nombre total de livres en stock: %d\n", total);
                 }
                 break;
 
